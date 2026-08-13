@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jaemin Shin — Ph.D. Student, Seoul National University</title>
+<meta name="description" content="Jaemin Shin — Ph.D. student in Civil and Environmental Engineering at Seoul National University. Research on timely and reliable digital representation of construction environments: computer vision, neural 3D reconstruction, SLAM, and digital twins.">
+<meta name="author" content="Jaemin Shin">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a4a7a'/><text x='50' y='68' font-size='52' font-family='Georgia,serif' fill='white' text-anchor='middle'>JS</text></svg>">
+<meta property="og:title" content="Jaemin Shin">
+<meta property="og:description" content="Ph.D. student — computer vision, neural 3D reconstruction, and digital twins for construction.">
+<meta property="og:type" content="profile">
+<style>
+  :root{
+    --bg:#fdfdfc;
+    --surface:#f6f5f2;
+    --ink:#1b1b19;
+    --ink-2:#3d3d39;
+    --muted:#75746e;
+    --line:#e3e1db;
+    --accent:#1a4a7a;
+    --accent-soft:#eaf0f7;
+    --warn:#8a5a12;
+    --warn-soft:#fbf2e2;
+    --maxw:1080px;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue","Pretendard","Noto Sans KR",Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:24px;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:15.5px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:2px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+
+  /* ---------- Layout ---------- */
+  .wrap{
+    max-width:var(--maxw);margin:0 auto;padding:64px 32px 96px;
+    display:grid;grid-template-columns:262px 1fr;gap:64px;align-items:start;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .side{position:sticky;top:48px}
+  .avatar{
+    width:118px;height:118px;border-radius:50%;
+    background:var(--surface);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:40px;letter-spacing:.02em;
+    margin-bottom:20px;overflow:hidden;user-select:none;
+    box-shadow:0 0 0 1px var(--line), 0 1px 3px rgba(0,0,0,.06);
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .side h1{font-size:26px;line-height:1.2;margin:0 0 2px}
+  .side .kr{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+  .side .role{font-size:14px;color:var(--ink-2);line-height:1.5;margin-bottom:4px}
+  .side .role strong{font-weight:600;color:var(--ink)}
+  .side .org{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+  .links{list-style:none;padding:0;margin:22px 0 0;font-size:13.5px}
+  .links li{margin-bottom:7px;display:flex;gap:9px;align-items:baseline}
+  .links .k{color:var(--muted);min-width:58px;flex:none;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  .links a{word-break:break-word}
+
+  nav{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+  nav a{
+    display:block;font-size:13.5px;color:var(--muted);padding:3.5px 0;
+    border-left:2px solid transparent;padding-left:11px;margin-left:-13px;
+    transition:color .15s,border-color .15s;
+  }
+  nav a:hover{color:var(--ink);text-decoration:none}
+  nav a.active{color:var(--accent);border-left-color:var(--accent);font-weight:500}
+
+  /* ---------- Main ---------- */
+  main{min-width:0}
+  section{margin-bottom:52px;scroll-margin-top:32px}
+  section:last-child{margin-bottom:0}
+  h2{
+    font-size:12.5px;font-family:var(--sans);font-weight:600;
+    text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
+    padding-bottom:9px;border-bottom:1px solid var(--line);margin:0 0 22px;
+  }
+  h3{font-size:15px;margin:26px 0 12px;color:var(--ink)}
+  h3:first-of-type{margin-top:0}
+  p{margin:0 0 14px;color:var(--ink-2)}
+  .lead{font-size:16.5px;line-height:1.7;color:var(--ink-2)}
+  .lead strong{color:var(--ink);font-weight:600}
+
+  /* Research interests */
+  .interests{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+  .interests li{
+    position:relative;padding-left:20px;font-size:14.5px;color:var(--ink-2);
+  }
+  .interests li::before{
+    content:"";position:absolute;left:2px;top:9px;
+    width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.55;
+  }
+
+  /* Timeline entries (education / experience) */
+  .entry{display:grid;grid-template-columns:132px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .entry:last-child{border-bottom:0}
+  .entry .when{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+  .entry .what{min-width:0}
+  .entry .title{font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:2px}
+  .entry .sub{font-size:13.5px;color:var(--ink-2)}
+  .entry .note{font-size:12.5px;color:var(--muted);margin-top:2px}
+
+  /* Publications */
+  ol.pubs{list-style:none;counter-reset:p;padding:0;margin:0}
+  ol.pubs li{
+    counter-increment:p;position:relative;padding:0 0 16px 34px;margin-bottom:16px;
+    border-bottom:1px solid var(--line);font-size:14.5px;
+  }
+  ol.pubs li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  ol.pubs li::before{
+    content:"[" counter(p) "]";position:absolute;left:0;top:0;
+    font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px;
+  }
+  .pub-title{color:var(--ink);font-weight:500;display:block;margin-bottom:3px}
+  .authors{color:var(--ink-2)}
+  .me{font-weight:700;color:var(--ink)}
+  .venue{color:var(--muted);font-style:italic}
+  .tags{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{
+    font-size:11px;letter-spacing:.03em;padding:2.5px 8px;border-radius:20px;
+    background:var(--surface);color:var(--muted);white-space:nowrap;
+  }
+  .tag.review{background:var(--warn-soft);color:var(--warn)}
+  .tag.if{background:var(--accent-soft);color:var(--accent)}
+
+  /* Projects */
+  .proj{padding:13px 0;border-bottom:1px solid var(--line)}
+  .proj:last-child{border-bottom:0}
+  .proj .ptitle{font-weight:600;font-size:14.5px;color:var(--ink)}
+  .proj .pmeta{font-size:13px;color:var(--muted);margin-top:3px}
+  .proj .pmeta .dot{margin:0 7px;opacity:.5}
+  .role-tag{
+    display:inline-block;vertical-align:1.5px;margin-left:7px;
+    font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.05em;
+    padding:1.5px 7px;border-radius:20px;background:var(--accent-soft);color:var(--accent);
+  }
+
+  /* Repo cards */
+  .repos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  .repo{
+    border:1px solid var(--line);border-radius:8px;padding:14px 15px;background:#fff;
+    transition:border-color .15s,transform .15s;
+  }
+  .repo:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .repo a{font-family:var(--mono);font-size:13px;font-weight:600}
+  .repo p{font-size:13px;margin:6px 0 9px;color:var(--muted);line-height:1.5}
+  .repo .rmeta{font-size:11.5px;color:var(--muted);display:flex;gap:12px;align-items:center}
+  .lang{display:inline-flex;align-items:center;gap:5px}
+  .dotc{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+  /* Skills */
+  .skills{display:grid;gap:12px}
+  .skillrow{display:grid;grid-template-columns:150px 1fr;gap:18px;font-size:14px;align-items:baseline}
+  .skillrow .k{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding-top:2px}
+  .skillrow .v{color:var(--ink-2)}
+
+  /* Awards */
+  ul.plain{list-style:none;padding:0;margin:0}
+  ul.plain li{
+    display:grid;grid-template-columns:132px 1fr;gap:20px;
+    padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;
+  }
+  ul.plain li:last-child{border-bottom:0}
+  ul.plain .when{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+  ul.plain .what{color:var(--ink-2)}
+
+  /* Coursework */
+  details.course{border-top:1px solid var(--line);padding-top:14px;margin-top:6px}
+  details.course summary{
+    cursor:pointer;font-size:13px;color:var(--muted);list-style:none;
+    display:flex;align-items:center;gap:7px;user-select:none;
+  }
+  details.course summary::-webkit-details-marker{display:none}
+  details.course summary::before{content:"+";font-family:var(--mono);color:var(--accent)}
+  details.course[open] summary::before{content:"–"}
+  details.course summary:hover{color:var(--ink)}
+  .coursegrid{margin-top:16px;display:grid;gap:14px}
+  .coursegrid .cat{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:5px}
+  .coursegrid .items{font-size:13.5px;color:var(--muted);line-height:1.7}
+
+  footer{
+    grid-column:1/-1;margin-top:28px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .wrap{grid-template-columns:1fr;gap:40px;padding:40px 24px 72px}
+    .side{position:static}
+    nav{display:none}
+    .entry,ul.plain li{grid-template-columns:1fr;gap:3px}
+    .entry .when,ul.plain .when{padding-top:0}
+    .skillrow{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    nav,.repo:hover{display:revert}
+    body{font-size:11pt}
+    .wrap{display:block;max-width:none;padding:0}
+    .side{margin-bottom:24pt}
+    nav{display:none}
+    a{color:var(--ink)}
+    section{break-inside:avoid;margin-bottom:18pt}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="avatar"><img src="data:image/jpeg;base64,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" alt="Portrait of Jaemin Shin" width="118" height="118"></div>
+
+    <h1>Jaemin Shin</h1>
+    <div class="kr">신제민</div>
+
+    <div class="role"><strong>Ph.D. Student</strong></div>
+    <div class="org">
+      Civil, Urban &amp; Environmental Engineering<br>
+      Seoul National University
+    </div>
+    <div class="org" style="margin-top:10px">
+      <em>Visiting Ph.D. Student</em><br>
+      University of Michigan, Ann Arbor
+    </div>
+
+    <ul class="links">
+      <li><span class="k">Email</span><a href="mailto:wpals113@snu.ac.kr">wpals113@snu.ac.kr</a></li>
+      <li><span class="k">GitHub</span><a href="https://github.com/Jaeminiman" target="_blank" rel="noopener">Jaeminiman</a></li>
+      <li><span class="k">Scholar</span><a href="https://scholar.google.com/citations?user=r1fqRyAAAAAJ" target="_blank" rel="noopener">Google&nbsp;Scholar</a></li>
+      <li><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/jaemin-shin-a9b438271/" target="_blank" rel="noopener">jaemin-shin</a></li>
+      <li><span class="k">Lab</span><a href="https://cm.snu.ac.kr/en/" target="_blank" rel="noopener">C!Lab, SNU</a></li>
+    </ul>
+
+    <nav id="nav">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#patents">Patents</a>
+      <a href="#projects">Research Projects</a>
+      <a href="#code">Code</a>
+      <a href="#experience">Experience</a>
+      <a href="#awards">Honors &amp; Awards</a>
+      <a href="#skills">Skills</a>
+    </nav>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+
+    <section id="about">
+      <h2>About</h2>
+      <p class="lead">
+        I am a Ph.D. student in the <strong>Construction Innovation Laboratory</strong> at Seoul National
+        University, advised by <strong>Prof. Seokho Chi</strong>, and currently a visiting Ph.D. student at the
+        University of Michigan with <strong>Prof. Sanghyun Lee</strong>. My research builds
+        <strong>timely and reliable digital representations of construction environments</strong> —
+        combining neural 3D reconstruction, SLAM, and vision–language models so that dynamic job sites can be
+        monitored, understood, and managed from data rather than from manual inspection.
+      </p>
+
+      <h3>Research Interests</h3>
+      <ul class="interests">
+        <li>Timely and reliable digital representation of construction environments</li>
+        <li>Automation in construction through computer vision and robotics</li>
+        <li>Digital twin-driven construction management and human–robot collaboration</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="when">2026 – Present</div>
+        <div class="what">
+          <div class="title">Visiting Ph.D. Student, Civil &amp; Environmental Engineering</div>
+          <div class="sub">University of Michigan, Ann Arbor, MI, USA</div>
+          <div class="note">Advisor: Prof. Sanghyun Lee</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="when">2023 – Present</div>
+        <div class="what">
+          <div class="title">Ph.D. Student, Civil, Urban &amp; Environmental Engineering</div>
+          <div class="sub">Seoul National University, Seoul, Korea</div>
+          <div class="note">Advisor: Prof. Seokho Chi</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="when">2017 – 2023</div>
+        <div class="what">
+          <div class="title">B.E. in Civil &amp; Environmental Engineering</div>
+          <div class="sub">Seoul National University, Seoul, Korea</div>
+          <div class="note">Minor: Computer Science and Engineering</div>
+        </div>
+      </div>
+
+      <details class="course">
+        <summary>Relevant coursework</summary>
+        <div class="coursegrid">
+          <div>
+            <div class="cat">Construction Engineering &amp; Management</div>
+            <div class="items">Construction Planning and Management · Construction Risk Management · Construction Information Management Systems · Construction IT and Automation · Project Planning and Control in Construction · Construction Quality and Safety Management · Advanced Built Environment Project Management Seminar</div>
+          </div>
+          <div>
+            <div class="cat">Data Science &amp; Computer Programming</div>
+            <div class="items">Statistics · Special Lecture on Data Science · Introduction to Data Mining · Database · Data Structures · Algorithm · Computer Programming · System Programming · Digital Computer Concept and Practice · Ambient AI · Theory of Lab of IoT, AI, and Big Data</div>
+          </div>
+          <div>
+            <div class="cat">Computer Vision, Robotics &amp; Spatial Informatics</div>
+            <div class="items">3D Computer Vision · Sensor-Based Spatial Intelligence · Robot Learning · Introduction to Geospatial Engineering · Spatial Information System · Advanced Geographic Information Systems</div>
+          </div>
+          <div>
+            <div class="cat">Technical Writing &amp; Presentation</div>
+            <div class="items">College Writing: Process &amp; Structure · English Writing and Presentation for Civil and Environmental Engineers</div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+
+      <h3>Refereed Journal Articles</h3>
+      <ol class="pubs">
+        <li>
+          <span class="pub-title">View-Consistent Change Detection Using Neural Rendering for UAV-Based Construction Monitoring</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Lee, G., and Chi, S.*</span> (2026).
+          <span class="venue">Journal of Construction Engineering and Management.</span>
+          <div class="tags">
+            <span class="tag review">Under Review</span>
+            <span class="tag">Submitted 12/2025</span>
+            <span class="tag if">Q1 · SCI-E · IF 5.4</span>
+          </div>
+        </li>
+        <li>
+          <span class="pub-title">Label-Efficient Object-Centric Change Detection for UAV-Based Construction Monitoring Using 3D Gaussian Splatting and the Segment Anything Model</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Kim, J., Cho, Y., Lee, S., and Chi, S.*</span> (2026).
+          <span class="venue">Engineering Applications of Artificial Intelligence.</span>
+          <div class="tags">
+            <span class="tag review">Under Review</span>
+            <span class="tag">Submitted 07/2026</span>
+            <span class="tag if">Q1 · SCI-E · IF 9.0</span>
+          </div>
+        </li>
+        <li>
+          <span class="pub-title">MVS Photogrammetry, NeRF, and 3D Gaussian Splatting for UAV-Based Earthwork Monitoring: A Task- and Coverage-Resolved Comparison</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Kim, J., Lee, S., Cho, Y., and Chi, S.*</span> (2026).
+          <span class="venue">Automation in Construction.</span>
+          <div class="tags">
+            <span class="tag review">Under Review</span>
+            <span class="tag">Submitted 08/2026</span>
+            <span class="tag if">Q1 · SCI-E · IF 12.6</span>
+          </div>
+        </li>
+        <li>
+          <span class="pub-title">A Probabilistic Framework for Modeling Construction Workers' Stress under Environmental Exposure</span>
+          <span class="authors">Lee, S., <span class="me">Shin, J.</span>, and Chi, S.*</span> (2026).
+          <span class="venue">Journal of Construction Engineering and Management.</span>
+          <div class="tags">
+            <span class="tag review">Under Review</span>
+            <span class="tag">Submitted 07/2026</span>
+            <span class="tag if">Q1 · SCI-E · IF 5.4</span>
+          </div>
+        </li>
+      </ol>
+
+      <h3>Refereed Conference Proceedings</h3>
+      <ol class="pubs">
+        <li>
+          <span class="pub-title">Train-Free Change Detection for Construction Site Monitoring from UAV Imagery</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Cho, Y., and Chi, S.</span> (2026).
+          <span class="venue">International Conference on Computing in Civil Engineering (i3CE 2026)</span>, Incheon, South Korea.
+        </li>
+        <li>
+          <span class="pub-title">A Dual-Modality Framework for Digital Twin Progress Monitoring Using 2D Area Measurement and 3D Volume Change Analysis</span>
+          <span class="authors">Cho, Y., <span class="me">Shin, J.</span>, Kim, S., Lee, G., and Chi, S.</span> (2026).
+          <span class="venue">International Conference on Computing in Civil Engineering (i3CE 2026)</span>, Incheon, South Korea.
+        </li>
+        <li>
+          <span class="pub-title">A Bayesian Rule List Algorithm for Detecting Hidden Physiological Distress in Workers under Safety Standards</span>
+          <span class="authors">Lee, S., <span class="me">Shin, J.</span>, and Chi, S.</span> (2026).
+          <span class="venue">International Conference on Computing in Civil Engineering (i3CE 2026)</span>, Incheon, South Korea.
+        </li>
+        <li>
+          <span class="pub-title">Advancement of a Universal Digital Twin Platform for Smart Construction and Automation</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Kim, J., Kim, S., Lee, S., Cho, Y., Kang, S., and Chi, S.</span> (2026).
+          <span class="venue">2026 KIEEME Annual Summer Conference</span>, Busan, Korea.
+        </li>
+        <li>
+          <span class="pub-title">Active LiDAR Scanning for 3D Reconstruction in Construction Sites with Online Reinforcement Learning</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Lee, G., and Chi, S.</span> (2025).
+          <span class="venue">2025 KSCE Civil Expo and Conference</span>, Chungju, Korea.
+        </li>
+        <li>
+          <span class="pub-title">Development of a Digital Twin Platform Applicable to All Sites for Smart Construction and Automation</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Chi, S., Kim, A., Kim, T., Moon, S., Lee, S., and Jung, Y.</span> (2025).
+          <span class="venue">KICS Summer Conference 2025</span>, Jeju, Korea.
+        </li>
+        <li>
+          <span class="pub-title">Integration of Vision Platforms: Generating a Unified 3D Digital Map for Real-time Construction Site Monitoring</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Kim, P., Choi, J., Cho, Y., Lee, G., and Chi, S.</span> (2025).
+          <span class="venue">42nd International Symposium on Automation and Robotics in Construction (ISARC 2025)</span>, Montreal, Canada.
+        </li>
+        <li>
+          <span class="pub-title">UAV-based Change Detection on Construction Sites for Rapid 3D Reconstruction</span>
+          <span class="authors"><span class="me">Shin, J.</span>, Lee, G., and Chi, S.</span> (2024).
+          <span class="venue">IEEE International Conference on Industrial Engineering and Engineering Management (IEEM 2024)</span>, Bangkok, Thailand.
+        </li>
+      </ol>
+    </section>
+
+    <section id="patents">
+      <h2>Patents</h2>
+      <ol class="pubs">
+        <li>
+          <span class="pub-title">A Method for Semantic Change Detection in Construction Sites Leveraging Video-Based Object Recognition and Foundation Segmentation Models</span>
+          <span class="authors">Chi, S., <span class="me">Shin, J.</span>, and Lee, G.</span>
+          <span class="venue">Korea Patent Application 10-2025-0144446</span>, filed 02 Oct 2025.
+        </li>
+      </ol>
+    </section>
+
+    <section id="projects">
+      <h2>Research Projects</h2>
+
+      <h3>Ongoing</h3>
+      <div class="proj">
+        <div class="ptitle">Digital Twin Platform for Smart Construction and Automation <span class="role-tag">PI</span></div>
+        <div class="pmeta">National Research Foundation of Korea <span class="dot">·</span> Project Manager (PM) <span class="dot">·</span> 07/2023 – Present</div>
+      </div>
+      <div class="proj">
+        <div class="ptitle">International Collaborative Research Center for Land, Infrastructure, and Transport <span class="role-tag">PI</span></div>
+        <div class="pmeta">Korea Agency for Infrastructure Technology Advancement <span class="dot">·</span> Research Assistant <span class="dot">·</span> 03/2024 – Present</div>
+      </div>
+
+      <h3>Completed</h3>
+      <div class="proj">
+        <div class="ptitle">Smart Construction Technology Development Project through Field Operation on Roads <span class="role-tag">Co-PI</span></div>
+        <div class="pmeta">Korea Agency for Infrastructure Technology Advancement <span class="dot">·</span> Research Assistant <span class="dot">·</span> 07/2023 – 02/2026</div>
+      </div>
+      <div class="proj">
+        <div class="ptitle">Automated Development of Manual-Free Construction Standard Video Dataset and Multi-Camera Vision-Based Site Monitoring <span class="role-tag">PI</span></div>
+        <div class="pmeta">National Research Foundation of Korea <span class="dot">·</span> Research Assistant <span class="dot">·</span> 03/2024 – 02/2026</div>
+      </div>
+      <div class="proj">
+        <div class="ptitle">Field-Oriented Smart Construction Technology Research Planning to Nurture Hidden Champion Specialty Contractors</div>
+        <div class="pmeta">Korea Agency for Infrastructure Technology Advancement <span class="dot">·</span> Research Assistant <span class="dot">·</span> 02/2025 – 12/2025</div>
+      </div>
+      <div class="proj">
+        <div class="ptitle">Advisory for Enhancing Smart Construction Capabilities</div>
+        <div class="pmeta">CJ Engineering &amp; Construction <span class="dot">·</span> Research Assistant <span class="dot">·</span> 02/2024 – 01/2025</div>
+      </div>
+      <div class="proj">
+        <div class="ptitle">Development of Digital-Based Architectural Construction and Safety Supervision Technology</div>
+        <div class="pmeta">Korea Agency for Infrastructure Technology Advancement <span class="dot">·</span> Research Assistant <span class="dot">·</span> 10/2024 – 12/2024</div>
+      </div>
+      <div class="proj">
+        <div class="ptitle">Flexible and Efficient Model Compression Method for Various Applications and Environments</div>
+        <div class="pmeta">Institute of Information &amp; Communications Technology Planning &amp; Evaluation <span class="dot">·</span> Research Assistant <span class="dot">·</span> 01/2023 – 04/2023</div>
+      </div>
+    </section>
+
+    <section id="code">
+      <h2>Code</h2>
+      <p style="font-size:14px">Selected repositories from <a href="https://github.com/Jaeminiman" target="_blank" rel="noopener">github.com/Jaeminiman</a>.</p>
+      <div class="repos">
+        <div class="repo">
+          <a href="https://github.com/Jaeminiman/Building-Grounded-CD" target="_blank" rel="noopener">Building-Grounded-CD</a>
+          <p>Building change detection built on Grounding DINO and the Segment Anything Model.</p>
+          <div class="rmeta"><span class="lang"><span class="dotc" style="background:#3572A5"></span>Python</span><span>★ 7</span></div>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/Jaeminiman/AmbientAI_FashionRecommendation" target="_blank" rel="noopener">AmbientAI-FashionRecommendation</a>
+          <p>Fashion recommendation system — 2023 SNU Ambient AI Competition.</p>
+          <div class="rmeta"><span class="lang"><span class="dotc" style="background:#DA5B0B"></span>Jupyter Notebook</span></div>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/Jaeminiman/FastestMRI" target="_blank" rel="noopener">FastestMRI</a>
+          <p>Accelerated MRI reconstruction — 2023 SNU FastMRI Challenge submission.</p>
+          <div class="rmeta"><span class="lang"><span class="dotc" style="background:#3572A5"></span>Python</span></div>
+        </div>
+        <div class="repo">
+          <a href="https://github.com/Jaeminiman/Transportation-Analysis" target="_blank" rel="noopener">Transportation-Analysis</a>
+          <p>Transfer-based traffic congestion analysis using public smart card data.</p>
+          <div class="rmeta"><span class="lang"><span class="dotc" style="background:#DA5B0B"></span>Jupyter Notebook</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <h3>Professional</h3>
+      <div class="entry">
+        <div class="when">2023</div>
+        <div class="what">
+          <div class="title">Intern, Data Mining Laboratory</div>
+          <div class="sub">Dept. of Computer Science and Engineering, Seoul National University</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="when">2022</div>
+        <div class="what">
+          <div class="title">Intern, Construction Innovation Laboratory</div>
+          <div class="sub">Dept. of Civil and Environmental Engineering, Seoul National University</div>
+        </div>
+      </div>
+
+      <h3>Teaching</h3>
+      <div class="entry">
+        <div class="when">2025</div>
+        <div class="what">
+          <div class="title">Teaching Assistant — Construction Planning and Management</div>
+          <div class="sub">Seoul National University</div>
+        </div>
+      </div>
+
+      <h3>Training</h3>
+      <div class="entry">
+        <div class="when">07/2023 – 02/2024</div>
+        <div class="what">
+          <div class="title">Smart Digital Engineering Education and Training for Lead Engineer</div>
+          <div class="sub">Korea Institute for Advancement of Technology</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="awards">
+      <h2>Honors &amp; Awards</h2>
+      <ul class="plain">
+        <li><span class="when">2025, 2026</span><span class="what">Brain Korea 21 Four (BK21) Scholarship, Seoul National University</span></li>
+        <li><span class="when">2023</span><span class="what">Merit-based Scholarship, Seoul National University</span></li>
+        <li><span class="when">2021</span><span class="what">The Education and Research Foundation Scholarship, Seoul National University</span></li>
+        <li><span class="when">2020, 2022</span><span class="what">School Scholarship, Seoul National University</span></li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills">
+        <div class="skillrow">
+          <div class="k">Research</div>
+          <div class="v">Computer Vision (SLAM, Neural 3D Reconstruction, Vision–Language Models) · Data Science · Optimization</div>
+        </div>
+        <div class="skillrow">
+          <div class="k">Frameworks</div>
+          <div class="v">ROS · PyTorch · TensorFlow (Lite) · OpenCV · Open3D · Pandas · NumPy</div>
+        </div>
+        <div class="skillrow">
+          <div class="k">Languages</div>
+          <div class="v">Python (advanced) · C/C++ · Java · SQL</div>
+        </div>
+        <div class="skillrow">
+          <div class="k">Systems</div>
+          <div class="v">MongoDB · MySQL · Linux (server administration) · Git · Docker</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Jaemin Shin</span>
+    <span>Last updated August 2026</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Hide link rows whose URL hasn't been filled in yet.
+  document.querySelectorAll('a[data-placeholder]').forEach(function(a){
+    if(a.getAttribute('href') === '#'){ a.closest('li').style.display = 'none'; }
+  });
+
+  // Highlight the nav item for the section currently in view.
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var visible = new Set();
+
+  function paint(){
+    var first = Array.prototype.slice.call(document.querySelectorAll('main section'))
+      .map(function(s){ return s.id; })
+      .filter(function(id){ return visible.has(id); })[0];
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(first && map[first]) map[first].classList.add('active');
+  }
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting) visible.add(e.target.id); else visible.delete(e.target.id);
+      });
+      paint();
+    }, {rootMargin:'-10% 0px -70% 0px', threshold:0});
+    document.querySelectorAll('main section').forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
